@@ -117,9 +117,12 @@ body::before {
 .faq-a p:last-child { margin-bottom: 0; }
 .faq-a[contenteditable="true"] { cursor: text; }
 .faq-a[contenteditable="true"]:focus { outline: 2px dashed var(--gold); outline-offset: 6px; border-radius: 8px; }
-.edit-toolbar { position: fixed; bottom: 18px; right: 18px; z-index: 300; display: flex; gap: 8px; }
-.edit-toolbar button { background: var(--ink); color: var(--paper); border: 1px solid var(--gold); border-radius: 999px; padding: 8px 14px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-.edit-toolbar button:hover { background: var(--gold); color: var(--ink); }
+.lock-bar { position: fixed; top: 12px; right: 12px; z-index: 400; display: flex; align-items: center; gap: 8px; background: var(--ink); border: 1px solid var(--gold); border-radius: 999px; padding: 6px 10px 6px 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+.lock-bar .lock-status { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--paper); font-family: 'DM Sans', sans-serif; }
+.lock-bar button { background: var(--gold); color: var(--ink); border: none; border-radius: 999px; padding: 6px 12px; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.lock-bar button:hover { background: var(--gold-light); }
+.lock-bar.unlocked { border-color: var(--sage); }
+.lock-bar.unlocked button { background: var(--sage); color: var(--white); }
 
 /* ── Script box ── */
 .script-box {
@@ -1052,33 +1055,64 @@ updateProgress();
 
 (function makeAnswersEditable() {
   const STORAGE_PREFIX = 'ferra-faq-';
+  const PASSWORD = '123456798';
   const answers = document.querySelectorAll('.faq-a');
+  let unlocked = false;
+
   answers.forEach((a, i) => {
     const key = STORAGE_PREFIX + i;
     const saved = localStorage.getItem(key);
     if (saved !== null) a.innerHTML = saved;
-    a.setAttribute('contenteditable', 'true');
     a.setAttribute('spellcheck', 'true');
-    a.title = 'Click to edit. Changes save automatically in this browser.';
     ['click', 'mousedown', 'dblclick'].forEach(evt =>
-      a.addEventListener(evt, e => e.stopPropagation())
+      a.addEventListener(evt, e => { if (unlocked) e.stopPropagation(); })
     );
     a.addEventListener('input', () => {
-      localStorage.setItem(key, a.innerHTML);
+      if (unlocked) localStorage.setItem(key, a.innerHTML);
     });
   });
 
-  const toolbar = document.createElement('div');
-  toolbar.className = 'edit-toolbar';
-  const resetBtn = document.createElement('button');
-  resetBtn.textContent = 'Reset edits';
-  resetBtn.onclick = () => {
-    if (!confirm('Reset all edited answers to the original text? This cannot be undone.')) return;
-    Object.keys(localStorage).filter(k => k.startsWith(STORAGE_PREFIX)).forEach(k => localStorage.removeItem(k));
-    location.reload();
+  const bar = document.createElement('div');
+  bar.className = 'lock-bar';
+  const status = document.createElement('span');
+  status.className = 'lock-status';
+  const btn = document.createElement('button');
+  bar.appendChild(status);
+  bar.appendChild(btn);
+  document.body.appendChild(bar);
+
+  function applyState() {
+    answers.forEach(a => {
+      if (unlocked) {
+        a.setAttribute('contenteditable', 'true');
+        a.title = 'Click to edit. Changes save automatically in this browser.';
+      } else {
+        a.removeAttribute('contenteditable');
+        a.removeAttribute('title');
+      }
+    });
+    bar.classList.toggle('unlocked', unlocked);
+    status.textContent = unlocked ? '🔓 Unlocked' : '🔒 Locked';
+    btn.textContent = unlocked ? 'Lock' : 'Unlock';
+  }
+
+  btn.onclick = () => {
+    if (unlocked) {
+      unlocked = false;
+      applyState();
+      return;
+    }
+    const pw = prompt('Enter password to enable editing:');
+    if (pw === null) return;
+    if (pw === PASSWORD) {
+      unlocked = true;
+      applyState();
+    } else {
+      alert('Incorrect password.');
+    }
   };
-  toolbar.appendChild(resetBtn);
-  document.body.appendChild(toolbar);
+
+  applyState();
 })();
 </script>
 
