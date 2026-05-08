@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<!-- saved from url=(0188)file:///C:/Users/rohit/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/5ED7E148313CE5477E6F3E769188D39C0B291640/transfers/2026-19/ferra_trainer_guide.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferra — Trainer Onboarding Guide</title>
+<link href="./Ferra — Trainer Onboarding Guide_files/css2" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f0e0c; --paper: #f5f0e8; --cream: #ede8dc;
+  --gold: #c9a84c; --gold-light: #e8d49a; --rust: #b85c3a;
+  --sage: #5a7a5e; --muted: #7a7269; --border: #d4ccbc; --white: #fdfaf4;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 999; opacity: 0.4;
+}
+
+/* ── Layout ── */
+.shell { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+
+/* ── Mobile bar ── */
+.mobile-bar {
+  display: none; background: var(--ink); padding: 14px 20px;
+  align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.mobile-brand { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--gold); }
+.mobile-sub { font-size: 10px; color: #6a6458; letter-spacing: .1em; text-transform: uppercase; }
+.mobile-menu-btn {
+  background: none; border: 1px solid rgba(255,255,255,0.15); color: var(--paper);
+  width: 36px; height: 36px; border-radius: 8px; font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.mobile-progress { height: 3px; background: rgba(0,0,0,0.1); }
+.mobile-progress-fill { height: 100%; background: var(--gold); transition: width 0.4s ease; width: 0%; }
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200; }
+.sidebar-overlay.open { display: block; }
+.sidebar-drawer {
+  position: fixed; top: 0; left: -320px; width: 290px; height: 100vh;
+  background: var(--ink); z-index: 201; transition: left 0.28s ease;
+  overflow-y: auto; padding: 40px 24px; display: flex; flex-direction: column;
+}
+.sidebar-drawer.open { left: 0; }
+.drawer-close {
+  position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.07);
+  border: none; color: var(--paper); width: 30px; height: 30px; border-radius: 7px;
+  font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  background: var(--ink); color: var(--paper); padding: 40px 28px;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column;
+}
+.brand { margin-bottom: 32px; }
+.brand-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold); }
+.brand-sub { font-size: 10px; color: #7a7060; letter-spacing: .12em; text-transform: uppercase; margin-top: 3px; }
+.brand-sub2 { font-size: 10px; color: #5a5448; letter-spacing: .08em; text-transform: uppercase; margin-top: 2px; }
+.nav-section { margin-bottom: 4px; }
+.nav-section-label { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: #4a4840; padding: 12px 0 5px; font-weight: 600; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 8px;
+  cursor: pointer; transition: all .18s; margin-bottom: 2px; font-size: 12px; color: #9a9280; position: relative;
+}
+.nav-item:hover { background: rgba(255,255,255,0.05); color: var(--paper); }
+.nav-item.active { background: var(--gold); color: var(--ink); font-weight: 600; }
+.nav-item.done { color: var(--sage); }
+.nav-item.done .nav-check { opacity: 1; }
+.nav-num { width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; flex-shrink: 0; }
+.nav-item.active .nav-num { background: rgba(0,0,0,0.2); }
+.nav-item.done .nav-num { background: var(--sage); color: white; }
+.nav-check { position: absolute; right: 10px; opacity: 0; color: var(--sage); font-size: 11px; transition: opacity .2s; }
+.progress-bar-wrap { margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+.progress-label { display: flex; justify-content: space-between; font-size: 11px; color: #6a6458; margin-bottom: 7px; }
+.progress-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+
+/* ── Main ── */
+.main { padding: 48px 56px; max-width: 800px; }
+.section { display: none; animation: fadeSlide .35s ease both; }
+.section.active { display: block; }
+@keyframes fadeSlide { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+.section-header { margin-bottom: 32px; }
+.section-eyebrow { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; line-height: 1.15; color: var(--ink); margin-bottom: 8px; }
+.section-desc { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 580px; }
+
+/* ── FAQ cards ── */
+.faq-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+  margin-bottom: 12px; overflow: hidden; transition: box-shadow .2s;
+}
+.faq-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.05); }
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; cursor: pointer; gap: 16px;
+}
+.faq-q-text { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--ink); line-height: 1.35; flex: 1; }
+.faq-toggle { width: 28px; height: 28px; border-radius: 8px; background: var(--cream); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--muted); flex-shrink: 0; transition: all .2s; }
+.faq-card.open .faq-toggle { background: var(--gold); color: var(--ink); border-color: var(--gold); transform: rotate(45deg); }
+.faq-a {
+  display: none; padding: 0 22px 20px; font-size: 13.5px; color: var(--muted);
+  line-height: 1.8; border-top: 1px solid var(--border);
+}
+.faq-card.open .faq-a { display: block; padding-top: 16px; }
+.faq-a ul { padding-left: 18px; margin: 8px 0; }
+.faq-a li { margin-bottom: 5px; }
+.faq-a strong { color: var(--ink); }
+.faq-a p { margin-bottom: 8px; }
+.faq-a p:last-child { margin-bottom: 0; }
+
+/* ── Script box ── */
+.script-box {
+  background: var(--ink); color: var(--paper); border-radius: 10px;
+  padding: 16px 20px; margin: 12px 0; font-size: 13px; line-height: 1.8;
+}
+.script-box::before { content: '💬 SAY THIS'; display: block; font-size: 9px; letter-spacing: .16em; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+.script-box p { margin-bottom: 7px; }
+.script-box p:last-child { margin-bottom: 0; }
+.script-box strong { color: var(--gold-light); }
+
+/* ── Alert boxes ── */
+.alert { border-radius: 10px; padding: 14px 18px; margin: 10px 0; font-size: 13px; line-height: 1.7; }
+.alert-warn { background: #fef9ee; border: 1px solid #e8d49a; color: #7a5a20; }
+.alert-stop { background: #fdf0ec; border: 1px solid #e8b4a0; color: #7a2a14; }
+.alert-info { background: #eef3ee; border: 1px solid #b8d4bc; color: #2a4a2e; }
+.alert strong { font-weight: 600; }
+.alert ul { padding-left: 18px; margin-top: 6px; }
+.alert li { margin-bottom: 4px; }
+
+/* ── Step card ── */
+.step-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 22px 26px; margin-bottom: 14px; }
+.step-num { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.step-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+.step-body { font-size: 13.5px; color: var(--muted); line-height: 1.75; }
+.step-body ul { padding-left: 18px; margin-top: 6px; }
+.step-body li { margin-bottom: 5px; }
+.step-body strong { color: var(--ink); }
+
+/* ── Divider ── */
+.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* ── Buttons ── */
+.btn-row { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+.btn { padding: 12px 26px; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s; border: none; }
+.btn-primary { background: var(--ink); color: var(--gold); }
+.btn-primary:hover { background: #2a2a24; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+.btn-secondary { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ── Done screen ── */
+.done-screen { text-align: center; padding: 56px 0; }
+.done-icon { width: 70px; height: 70px; background: var(--ink); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 22px; }
+.done-title { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; margin-bottom: 12px; }
+.done-sub { font-size: 14px; color: var(--muted); max-width: 420px; margin: 0 auto 28px; line-height: 1.7; }
+.btn-restart { background: var(--gold); color: var(--ink); border: none; padding: 13px 30px; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .2s; }
+.btn-restart:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+/* ── Responsive ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .mobile-bar { display: flex; }
+  #mobProgWrap { display: block !important; }
+  .main { padding: 26px 18px 60px; max-width: 100%; }
+  .section-title { font-size: 24px; }
+  .btn-row { flex-wrap: wrap; }
+  .btn { flex: 1; min-width: 120px; text-align: center; }
+}
+@media (max-width: 480px) {
+  .section-title { font-size: 20px; }
+  .main { padding: 18px 13px 60px; }
+  .faq-q-text { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile bar -->
+<div class="mobile-bar" id="mobileBar">
+  <div>
+    <div class="mobile-brand">Ferra</div>
+    <div class="mobile-sub">Trainer Guide</div>
+  </div>
+  <button class="mobile-menu-btn" onclick="openDrawer()">☰</button>
+</div>
+<div class="mobile-progress" style="display:none" id="mobProgWrap">
+  <div class="mobile-progress-fill" id="mobileProgFill" style="width: 40%;"></div>
+</div>
+
+<!-- Drawer -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeDrawer()"></div>
+<div class="sidebar-drawer" id="sidebarDrawer">
+  <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  <div class="brand" style="margin-top:8px">
+    <div class="brand-name">Ferra</div>
+    <div class="brand-sub">Trainer Onboarding Guide</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Foundation</div>
+    <div class="nav-item done" onclick="goTo(0);closeDrawer()" id="dnav-0"><div class="nav-num">1</div>Understanding Ferra<span class="nav-check">✓</span></div>
+    <div class="nav-item done" onclick="goTo(1);closeDrawer()" id="dnav-1"><div class="nav-num">2</div>Duration &amp; Frequency<span class="nav-check">✓</span></div>
+    <div class="nav-item done" onclick="goTo(2);closeDrawer()" id="dnav-2"><div class="nav-num">3</div>Existing Routines<span class="nav-check">✓</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Technical</div>
+    <div class="nav-item done" onclick="goTo(3);closeDrawer()" id="dnav-3"><div class="nav-num">4</div>Machine &amp; App Issues<span class="nav-check">✓</span></div>
+    <div class="nav-item active" onclick="goTo(4);closeDrawer()" id="dnav-4"><div class="nav-num">5</div>Exercises &amp; Locking<span class="nav-check">✓</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Client Care</div>
+    <div class="nav-item" onclick="goTo(5);closeDrawer()" id="dnav-5"><div class="nav-num">6</div>Age, Injury &amp; Safety<span class="nav-check">✓</span></div>
+    <div class="nav-item" onclick="goTo(6);closeDrawer()" id="dnav-6"><div class="nav-num">7</div>Family Plans<span class="nav-check">✓</span></div>
+    <div class="nav-item" onclick="goTo(7);closeDrawer()" id="dnav-7"><div class="nav-num">8</div>Subscription &amp; Travel<span class="nav-check">✓</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Onboarding</div>
+    <div class="nav-item" onclick="goTo(8);closeDrawer()" id="dnav-8"><div class="nav-num">9</div>Onboarding Scenarios<span class="nav-check">✓</span></div>
+    <div class="nav-item" onclick="goTo(9);closeDrawer()" id="dnav-9"><div class="nav-num">10</div>Support &amp; Centre<span class="nav-check">✓</span></div>
+  </div>
+  <div class="progress-bar-wrap" style="margin-top:auto">
+    <div class="progress-label"><span>Progress</span><span id="dprog-pct">40%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="dprog-fill" style="width: 40%;"></div></div>
+  </div>
+</div>
+
+<div class="shell">
+
+<!-- ── Sidebar ── -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-name">Ferra</div>
+    <div class="brand-sub">Trainer Onboarding Guide</div>
+    <div class="brand-sub2">Confidential · Internal Use Only</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Foundation</div>
+    <div class="nav-item done" onclick="goTo(0)" id="nav-0"><div class="nav-num">1</div>Understanding Ferra<span class="nav-check">✓</span></div>
+    <div class="nav-item done" onclick="goTo(1)" id="nav-1"><div class="nav-num">2</div>Duration &amp; Frequency<span class="nav-check">✓</span></div>
+    <div class="nav-item done" onclick="goTo(2)" id="nav-2"><div class="nav-num">3</div>Existing Routines<span class="nav-check">✓</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Technical</div>
+    <div class="nav-item done" onclick="goTo(3)" id="nav-3"><div class="nav-num">4</div>Machine &amp; App Issues<span class="nav-check">✓</span></div>
+    <div class="nav-item active" onclick="goTo(4)" id="nav-4"><div class="nav-num">5</div>Exercises &amp; Locking<span class="nav-check">✓</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Client Care</div>
+    <div class="nav-item" onclick="goTo(5)" id="nav-5"><div class="nav-num">6</div>Age, Injury &amp; Safety<span class="nav-check">✓</span></div>
+    <div class="nav-item" onclick="goTo(6)" id="nav-6"><div class="nav-num">7</div>Family Plans<span class="nav-check">✓</span></div>
+    <div class="nav-item" onclick="goTo(7)" id="nav-7"><div class="nav-num">8</div>Subscription &amp; Travel<span class="nav-check">✓</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Onboarding</div>
+    <div class="nav-item" onclick="goTo(8)" id="nav-8"><div class="nav-num">9</div>Onboarding Scenarios<span class="nav-check">✓</span></div>
+    <div class="nav-item" onclick="goTo(9)" id="nav-9"><div class="nav-num">10</div>Support &amp; Centre<span class="nav-check">✓</span></div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-label"><span>Progress</span><span id="prog-pct">40%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width: 40%;"></div></div>
+  </div>
+</aside>
+
+<!-- ── Main ── -->
+<main class="main">
+
+  <!-- ══ 1. UNDERSTANDING FERRA ══ -->
+  <div class="section" id="sec-0">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 1 · Foundation</div>
+      <div class="section-title">Understanding Ferra</div>
+      <div class="section-desc">Know these answers deeply. Clients will ask them in every onboarding call. These are not scripts — they are the truth behind the product. Understand them, then say them in your own words.</div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">What is Ferra? How do I explain it to a client?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Tell them the story. It's the most powerful way to explain Ferra.</p>
+        <div class="script-box">
+          <p>"Ferra started with a simple problem. Our founder Rohit wanted his mother to start strength training — he knew how important it is after 50. He convinced her to join a gym, and she quit within a week."</p>
+          <p>"Her reason? '<strong>I don't want to build muscles or look like a model. I just want to stay strong and independent. Why should I spend one hour in the gym?</strong>'"</p>
+          <p>"That became the starting point. Nobody loves brushing their teeth — but everyone does it because it's important and takes very little time. What if strength training could be that simple?"</p>
+          <p>"That's Ferra. <strong>5 minutes. One exercise a day. The machine gets harder every session as you get stronger.</strong> Safe, short, consistent — for life."</p>
+        </div>
+        <p><strong>Core of Ferra in three points:</strong></p>
+        <ul>
+          <li>Short workouts — just 5 minutes is enough</li>
+          <li>Progressive strength — the machine pushes you to beat yourself every session</li>
+          <li>Maximum safety — auto resistance, no eccentric loading, no risk of injury</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">How does Ferra actually work?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <ul>
+          <li>7 exercises, 7 days a week — one exercise per day, rotating</li>
+          <li>Auto-resistance modulation — machine increases weight when you complete a rep, decreases when you struggle</li>
+          <li>Concentric-only training — no eccentric loading, so no soreness and no injury risk</li>
+          <li>The volume bar — fills as you lift; turns green when you've beaten last session's volume = personal best</li>
+        </ul>
+        <div class="script-box">
+          <p>"The machine remembers how much you lifted last time. Today it challenges you to do slightly more. Complete a rep — weight goes up. Struggling — weight comes down automatically. You can never get stuck."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">What makes Ferra different from the gym?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p><strong>The gym is great — for people who love it, have time, and want variety.</strong> Ferra is for everyone else.</p>
+        <ul>
+          <li>No travel time. No equipment confusion. No soreness.</li>
+          <li>Designed specifically for people 40–60+ who need strength but struggle with the gym</li>
+          <li>5–15 minutes is all it takes — at home, every day</li>
+        </ul>
+        <div class="alert alert-warn">
+          <strong>Never say Ferra replaces the gym.</strong> If a client thinks that, correct it immediately: Ferra has limited exercises, one arm at a time, max 50kg, no eccentric loading. It's a complement — not a replacement.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Can Ferra help with weight loss?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Ferra doesn't directly burn fat — but here's what it does. When people lose weight, they often lose muscle along with it. That slows metabolism, causes weakness, and makes the weight loss unsustainable."</p>
+          <p>"<strong>Ferra helps you retain lean body mass while you lose fat — so your body stays toned, strong, and your metabolism stays active.</strong> Think of it as the muscle-preservation tool that makes your weight loss actually work."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Can Ferra help build muscle?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Building muscle means getting stronger over time — and if you're consistently filling the volume bar, that's exactly what's happening. <strong>You are getting stronger. That stimulates muscle growth.</strong>"</p>
+          <p>"That said, Ferra isn't for bodybuilding or extreme muscle gain. The goal here is functional strength — staying independent, pain-free, and strong in your 70s and 80s. That's a more important kind of strength."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="goTo(1)">Next → Duration &amp; Frequency</button>
+    </div>
+  </div>
+
+  <!-- ══ 2. DURATION & FREQUENCY ══ -->
+  <div class="section" id="sec-1">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 2 · Foundation</div>
+      <div class="section-title">Duration &amp; Frequency</div>
+      <div class="section-desc">Clients always ask about time and how often. Have clear, confident answers. The key message: consistency beats intensity.</div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Can they do more than 5 minutes?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Absolutely — the machine will never limit you. Finish your exercise of the day, fill the bar, and if you want more, tap <strong>'Do More Exercises'</strong>. The machine will build a custom plan based on your last 7 days."</p>
+          <p>"But here's our philosophy: <strong>first make 5 minutes a daily habit. Once that's locked in, do more. We've seen too many people try to do too much and then stop altogether.</strong> Consistency is everything."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Why only 5 minutes?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Because habits are built by showing up, not by duration. If we can make strength training something that takes almost no time and is genuinely effective — the chances of doing it every day go up dramatically."</p>
+          <p>"<strong>5 quality minutes of progressive strength training is more valuable than 3 gym sessions a month.</strong>"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">How many sets can they do of the exercise of the day?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Up to <strong>3 sets</strong> of the exercise of the day per day. Always encourage them to fill the bar on each set.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Can they use Ferra multiple times a day?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Yes — morning, afternoon, and evening if they want. The key reminder: <strong>don't obsess over doing three sets if you're not consistently doing even one.</strong> Always try to fill the bar. That's the metric that matters.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">How many days a week should they use Ferra?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p><strong>Every day.</strong> Ferra is built on low-volume, high-frequency training. One exercise per day is the lowest possible dose — there's no reason to skip days. This is the whole point.</p>
+        <div class="script-box">
+          <p>"Think of it like brushing your teeth. You don't take days off from that, right? <strong>One exercise, 5 minutes, every day.</strong> That's it."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">They already do strength training / yoga / cardio. How do they combine it?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Yoga gives you flexibility and mobility. Cardio gives you endurance. Ferra gives you strength. <strong>All three are different fitness components — Ferra is just the strength piece, and it takes 5–15 minutes.</strong>"</p>
+          <p>"Keep doing everything else. Just add Ferra for your strength component. You don't need to choose."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(0)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(2)">Next → Existing Routines</button>
+    </div>
+  </div>
+
+  <!-- ══ 3. EXISTING ROUTINES ══ -->
+  <div class="section" id="sec-2">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 3 · Foundation</div>
+      <div class="section-title">Existing Fitness Routines</div>
+      <div class="section-desc">Many clients come with existing habits. Reassure them — Ferra adds to what they're doing, not replaces it.</div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">They do yoga. Should they stop?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Absolutely not — keep doing yoga. Yoga is excellent for flexibility and mobility. <strong>But the strength component of yoga is hard — managing your own bodyweight in complex postures takes years to build.</strong>"</p>
+          <p>"Ferra handles your strength component directly. Yoga + Ferra = mobility, flexibility, and strength. All three pillars of a healthy body, covered."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">They already do strength training 2–3 times a week. Can they use Ferra on off days?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Yes — perfect actually. On your gym-off days, Ferra keeps the signal going. <strong>Concentric-only training means no muscle soreness, no recovery cost.</strong> It won't interfere with your gym sessions at all."</p>
+        </div>
+        <p>Ferra's low volume means there's no risk of overtraining or affecting their gym performance.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">They run / cycle / swim. Can they continue?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Definitely — those activities build your stamina and cardiovascular endurance. Ferra builds strength. <strong>Keep doing all of it. They work together, not against each other.</strong>"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Should they take rest days?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>If they feel like it — yes, of course. But the minimum dose on Ferra is so small that rest days are rarely needed for recovery from Ferra alone. If they're also doing high-volume gym training, rest makes sense. The rule: <strong>always try to fill the bar, even if it's just one set.</strong></p>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(1)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(3)">Next → Machine &amp; App Issues</button>
+    </div>
+  </div>
+
+  <!-- ══ 4. MACHINE & APP ISSUES ══ -->
+  <div class="section" id="sec-3">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 4 · Technical</div>
+      <div class="section-title">Machine &amp; App Issues</div>
+      <div class="section-desc">Clients will hit these issues. Know the answers cold — troubleshooting confidence builds trust.</div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Phone is not connecting to the machine. What do I tell them?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="alert alert-stop"><strong>🚫 Never ask them to connect via the phone's Bluetooth settings manually.</strong> Ferra connects automatically through the app — not through the system Bluetooth pairing screen.</div>
+        <div class="script-box">
+          <p>"Don't connect from your phone's Bluetooth settings — Ferra connects automatically when you open the app near the machine."</p>
+          <p>"If it's still not connecting: <strong>close the Ferra app, wait 10 seconds, reopen it. Also turn the Ferra machine off, wait 10 seconds, turn it back on.</strong> Make sure Bluetooth is ON. That fixes it almost every time."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Should Bluetooth stay ON all the time?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>No — only during workouts. They can leave it off the rest of the time. Just turn it on before opening the Ferra app to work out.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Should the machine stay ON all the time?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>No — only during workouts. Turn it off when not in use.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">App is not detecting the machine — what now?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Same fix as the connectivity issue:</p>
+        <ul>
+          <li>Close the Ferra app completely</li>
+          <li>Turn the Ferra machine OFF</li>
+          <li>Wait 10 seconds</li>
+          <li>Turn the machine back ON</li>
+          <li>Reopen the Ferra app</li>
+          <li>Confirm Bluetooth is ON and location permission is allowed</li>
+        </ul>
+        <div class="alert alert-info">Location permission is only needed once. If the app asks for it, always allow it.</div>
+      </div>
+    </div>
+
+    <div class="faq-card open" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">How far should the phone be from the machine?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Right next to the machine — they'll be using the Ferra app while working out, so they're always close to it anyway. No special distance management needed.</p>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(2)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(4)">Next → Exercises &amp; Locking</button>
+    </div>
+  </div>
+
+  <!-- ══ 5. EXERCISES & LOCKING ══ -->
+  <div class="section active" id="sec-4">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 5 · Technical</div>
+      <div class="section-title">Exercises &amp; Locking Points</div>
+      <div class="section-desc">These are coaching questions. Know them precisely — they come up during every onboarding session.</div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Client wants more leg exercises. What do you tell them?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Ferra gives you two lower body exercises — the Chair Squat (quads) and Good Morning (hamstrings, glutes, lower back). <strong>These are functional movements that you actually use in daily life.</strong> They train every joint and muscle of the lower body."</p>
+          <p>"If you want more, we also have leg extensions and leg curls — go to Quick Actions → Start Workout → Add Exercise section."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Can they add exercises beyond the exercise of the day?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>After completing the exercise of the day, the app asks if they want to do more. They can also go to <strong>Quick Actions → Start Fresh Workout → Add Exercise</strong> to choose any exercise independently.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Does the machine know which locking point the client is using?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p><strong>No.</strong> The machine does not detect the locking point. It's the trainer's job to confirm the correct locking point during onboarding. The recommended locking point is shown in the instruction video in the app — follow that unless you've assessed a reason to change it.</p>
+      </div>
+    </div>
+
+    <div class="faq-card open" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Can they use the same exercise on a different locking point?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Yes — but locking point affects the cable/bar angle, which changes how well the muscle is targeted. The app instruction video shows the recommended locking point. Change it only if there's a specific reason — for example:</p>
+        <ul>
+          <li>Seated rows: 4th lock recommended, but 3rd if client uses a very low chair</li>
+          <li>Shoulder press: 5th lock standard, but 3rd or 4th if client needs to sit due to weak lower body</li>
+        </ul>
+        <div class="alert alert-warn"><strong>Wrong locking point = reduced resistance effectiveness.</strong> Always confirm locking point during onboarding and tell the client which one to use going forward.</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(3)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(5)">Next → Age, Injury &amp; Safety</button>
+    </div>
+  </div>
+
+  <!-- ══ 6. AGE, INJURY & SAFETY ══ -->
+  <div class="section" id="sec-5">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 6 · Client Care</div>
+      <div class="section-title">Age, Injury &amp; Safety</div>
+      <div class="section-desc">The most sensitive section. Know when to proceed, when to pause, and when to refer to the assessment centre.</div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Client is elderly and struggling to do an exercise. What do I do?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Try your best to accommodate with simplifications — assist them with the Ferra bar in hand, find the easiest version of the movement possible.</p>
+        <p>If they genuinely cannot perform the exercise safely no matter what you try:</p>
+        <div class="script-box">
+          <p>"No problem at all. What we'll do is book you in for a fitness assessment at our centre. We check your mobility, flexibility, stability, and how your body moves. Based on that, we give you a fully customised plan — including which exercises to do and which modifications to use."</p>
+        </div>
+        <div class="alert alert-info"><strong>Never force an exercise.</strong> If it's not safe, escalate to assessment. Contact Ashima.</div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Client has knee pain / back pain / shoulder pain. How do I handle it?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Same principle as above. Try to find a modification first. If the pain is significant or the movement is clearly unsafe:</p>
+        <ul>
+          <li>Do not push through it</li>
+          <li>Refer them to the in-centre fitness assessment</li>
+          <li>The assessment will identify exactly which movements are safe and which to avoid</li>
+        </ul>
+        <div class="alert alert-stop"><strong>🚫 Never coach through pain.</strong> If a client reports discomfort during an exercise, stop immediately and ask them to contact Ashima before doing that exercise again.</div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Is Ferra safe for complete beginners?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"Actually — Ferra is the safest machine possible for a beginner. No eccentric loading, auto-resistance that reduces when you struggle, guided exercises, and short duration. <strong>Even an advanced lifter will hit failure on Ferra in 3–5 minutes.</strong> For a beginner, it's perfectly calibrated."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Client feels discomfort during the workout. What should they do?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p><strong>Stop the exercise immediately.</strong> Do not push through. Ask them to reach out to Ashima directly. Once form and technique have been reviewed by Ashima, only then resume that exercise.</p>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(4)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(6)">Next → Family Plans</button>
+    </div>
+  </div>
+
+  <!-- ══ 7. FAMILY PLANS ══ -->
+  <div class="section" id="sec-6">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 7 · Client Care</div>
+      <div class="section-title">Family Plans &amp; Multi-User Setup</div>
+      <div class="section-desc">Know the pricing and how to handle multi-user onboarding correctly.</div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Can multiple family members use the same machine?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Yes — but each member must have their own account registered on the app on their own phone. The machine tracks each person's profile independently.</p>
+        <div class="step-card" style="margin-top:12px">
+          <div class="step-num">Pricing</div>
+          <div class="step-body">
+            <ul>
+              <li><strong>1 person</strong> — ₹1,500 / month</li>
+              <li><strong>2 people</strong> — ₹2,000 / month</li>
+              <li><strong>Family (up to 6 members)</strong> — ₹3,000 / month</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert-info" style="margin-top:10px">For duo or family plans — every member must install the app and register themselves individually before onboarding.</div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Client has a young child — can they use Ferra?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Bring them in for the fitness assessment first. The assessment will determine whether Ferra is appropriate for them and at what level. Do not give a blanket yes or no on the call.</p>
+        <div class="script-box">
+          <p>"The best thing to do is bring them for an assessment at our centre. We'll check their movement, strength, and fitness level — and tell you exactly what Ferra can do for them."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Is there an age limit?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p><strong>No upper age limit.</strong> Ferra is built especially for 50–60+ with concentric-only training and auto-resistance. It's safe for every age group. For younger users or children, refer to the fitness assessment for case-by-case evaluation.</p>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(5)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(7)">Next → Subscription &amp; Travel</button>
+    </div>
+  </div>
+
+  <!-- ══ 8. SUBSCRIPTION & TRAVEL ══ -->
+  <div class="section" id="sec-7">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 8 · Client Care</div>
+      <div class="section-title">Subscription &amp; Travel</div>
+      <div class="section-desc">Clear policy answers. Know these so you don't create false expectations.</div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Can they pause the subscription while travelling?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p><strong>No — pausing is currently not available.</strong> Be clear and direct about this. Do not suggest it might be possible in the future unless officially communicated by the team.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">What happens if they don't use the machine for a few weeks?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <div class="script-box">
+          <p>"The app tracks your habit score — how often you work out, how many sets you do, whether you're filling the bar. If you don't work out for a few weeks, your habit score will drop."</p>
+          <p>"The machine will still be there — just come back and start again. <strong>The goal is always consistency. Even one set a day keeps the habit alive.</strong>"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Can they carry the machine while travelling?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p><strong>No.</strong> The machine is not portable. Encourage them to use the "Do more exercises" function to build a stockpile of habit before a trip, and to resume immediately when they return.</p>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(6)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(8)">Next → Onboarding Scenarios</button>
+    </div>
+  </div>
+
+  <!-- ══ 9. ONBOARDING SCENARIOS ══ -->
+  <div class="section" id="sec-8">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 9 · Onboarding</div>
+      <div class="section-title">Onboarding Scenarios</div>
+      <div class="section-desc">How to handle different client situations during onboarding calls. These come up regularly — know the protocol for each.</div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Three family members are onboarding together. What's the approach?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p><strong>Before the call:</strong></p>
+        <ul>
+          <li>Every member must have the app installed</li>
+          <li>Every member must be registered individually on the app with their own phone</li>
+          <li>All numbers must be registered in the Ferra backend</li>
+        </ul>
+        <p style="margin-top:10px"><strong>During the call:</strong></p>
+        <ul>
+          <li>Do all theory (machine overview, resistance logic, app controls) with everyone present — don't repeat it</li>
+          <li>When the first user does their bicep curls (the full locking demonstration), everyone else should be watching</li>
+          <li>Add the first user to the Ferra WhatsApp group → send the link → remaining members join</li>
+          <li>For remaining members — only teach the 7 exercises. Theory is already covered.</li>
+          <li>Explain the daily habit (fill the bar, do more exercises) once — with all members present</li>
+        </ul>
+        <div class="alert alert-info"><strong>Key principle:</strong> Theory once, exercises per person. Efficient and thorough.</div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">How do you handle onboarding for elderly clients?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Elderly does not mean unfit or unable. Most elderly clients can follow along with proper instruction on a video call.</p>
+        <ul>
+          <li>If they can follow your instructions and perform the exercises — proceed normally with video call onboarding</li>
+          <li>If you notice restricted movement, pain, or clear physical limitations during the call — stop and refer to the in-centre assessment</li>
+        </ul>
+        <div class="script-box">
+          <p>"I'd recommend coming in for a fitness assessment first. Our coaches will check your movement in person and make sure your Ferra plan is perfectly suited to your body."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">Client has injuries — same protocol as elderly?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>Yes — same principle. Try to accommodate on the call first. If the injury clearly restricts safe exercise, refer to the in-centre assessment. Never push through pain or force a movement that doesn't feel right for that client.</p>
+      </div>
+    </div>
+
+    <div class="faq-card" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <div class="faq-q-text">What are the most important things to cover in every onboarding?</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">
+        <p>These four things — every time, without fail:</p>
+        <ul>
+          <li><strong>Auto-resistance modulation</strong> — the machine adjusts for you automatically</li>
+          <li><strong>One-way (concentric) loading</strong> — what it is and why it's safe</li>
+          <li><strong>Fill the bar</strong> — this is the daily goal, every session</li>
+          <li><strong>The exercise programme</strong> — exercise of the day daily, tap "Do More Exercises" for extra, Finish and Share to the group</li>
+        </ul>
+        <div class="alert alert-info">If a client leaves the onboarding call knowing these four things confidently, the onboarding is a success.</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(7)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(9)">Next → Support &amp; Centre</button>
+    </div>
+  </div>
+
+  <!-- ══ 10. SUPPORT & CENTRE ══ -->
+  <div class="section" id="sec-9">
+    <div class="section-header">
+      <div class="section-eyebrow">Section 10 · Support</div>
+      <div class="section-title">Support &amp; Centre Information</div>
+      <div class="section-desc">Quick reference for client escalations and centre details.</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">Assessment Centre Address</div>
+      <div class="step-title">Ferra Bangalore Centre</div>
+      <div class="step-body">
+        1st Floor, Central Square, 47/1, Central St, Tasker Town, Shivaji Nagar, Bengaluru — 560001<br><br>
+        Near Cubbon Park metro station on Infantry Road — the side building of Prestige / WeWork building.<br><br>
+        <a href="https://share.google/2r4Jg4HavICuhYkmr" target="_blank" style="color:var(--gold)">→ Open in Google Maps</a>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">Escalation Contact</div>
+      <div class="step-title">For technical issues, injuries, and onboarding support</div>
+      <div class="step-body">
+        Contact <strong>Ashima</strong> for:<br>
+        <ul style="margin-top:8px">
+          <li>Technical issues with the app or machine</li>
+          <li>Form review when client reports discomfort</li>
+          <li>Booking fitness assessments at the centre</li>
+          <li>Booking additional onboarding sessions</li>
+          <li>Any situation you're unsure how to handle</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">WhatsApp Groups</div>
+      <div class="step-title">Daily Workout Ferra Groups</div>
+      <div class="step-body">
+        <ul>
+          <li>Max <strong>10 clients</strong> per group</li>
+          <li>When a group is full, create a new one</li>
+          <li>Naming format: <strong>Daily Workout Ferra C0[number]</strong> (e.g. C01, C02, C03)</li>
+          <li>Send the group link to the client after their first "Finish and Share" screenshot</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(8)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(10)">Complete Guide ✓</button>
+    </div>
+  </div>
+
+  <!-- ══ DONE ══ -->
+  <div class="section" id="sec-10">
+    <div class="done-screen">
+      <div class="done-icon">📋</div>
+      <div class="done-title">Guide Complete</div>
+      <div class="done-sub">You've reviewed all 10 sections of the Ferra Trainer Onboarding Guide. You're ready to run confident, thorough onboarding sessions.</div>
+      <button class="btn-restart" onclick="restart()">Review Again</button>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+let current = 0;
+const total = 10;
+
+function toggleFaq(card) {
+  const isOpen = card.classList.contains('open');
+  // close all in this section
+  card.closest('.section').querySelectorAll('.faq-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+function goTo(idx) {
+  document.getElementById('sec-' + current).classList.remove('active');
+  document.getElementById('nav-' + current)?.classList.remove('active');
+  document.getElementById('dnav-' + current)?.classList.remove('active');
+  if (idx > current) {
+    document.getElementById('nav-' + current)?.classList.add('done');
+    document.getElementById('dnav-' + current)?.classList.add('done');
+  }
+  current = idx;
+  document.getElementById('sec-' + current)?.classList.add('active');
+  const nav = document.getElementById('nav-' + current);
+  if (nav) { nav.classList.remove('done'); nav.classList.add('active'); }
+  const dnav = document.getElementById('dnav-' + current);
+  if (dnav) { dnav.classList.remove('done'); dnav.classList.add('active'); }
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+  const pct = Math.round((Math.min(current, total) / total) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  const mf = document.getElementById('mobileProgFill');
+  if (mf) mf.style.width = pct + '%';
+  const df = document.getElementById('dprog-fill');
+  if (df) df.style.width = pct + '%';
+  const dp = document.getElementById('dprog-pct');
+  if (dp) dp.textContent = pct + '%';
+}
+
+function openDrawer() {
+  document.getElementById('sidebarDrawer').classList.add('open');
+  document.getElementById('sidebarOverlay').classList.add('open');
+}
+
+function closeDrawer() {
+  document.getElementById('sidebarDrawer').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+function restart() {
+  for (let i = 0; i <= total; i++) {
+    document.getElementById('sec-' + i)?.classList.remove('active');
+    document.getElementById('nav-' + i)?.classList.remove('active', 'done');
+    document.getElementById('dnav-' + i)?.classList.remove('active', 'done');
+  }
+  current = 0;
+  document.getElementById('sec-0').classList.add('active');
+  document.getElementById('nav-0')?.classList.add('active');
+  document.getElementById('dnav-0')?.classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateProgress();
+</script>
+
+
+</body></html>
