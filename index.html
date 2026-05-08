@@ -998,12 +998,14 @@ function toggleFaq(card) {
 }
 
 function goTo(idx) {
-  document.getElementById('sec-' + current).classList.remove('active');
-  document.getElementById('nav-' + current)?.classList.remove('active');
-  document.getElementById('dnav-' + current)?.classList.remove('active');
   if (idx > current) {
     document.getElementById('nav-' + current)?.classList.add('done');
     document.getElementById('dnav-' + current)?.classList.add('done');
+  }
+  for (let i = 0; i <= total; i++) {
+    document.getElementById('sec-' + i)?.classList.remove('active');
+    document.getElementById('nav-' + i)?.classList.remove('active');
+    document.getElementById('dnav-' + i)?.classList.remove('active');
   }
   current = idx;
   document.getElementById('sec-' + current)?.classList.add('active');
@@ -1051,6 +1053,16 @@ function restart() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// Normalize initial state — strip any pre-existing .active and start at section 0
+for (let i = 0; i <= total; i++) {
+  document.getElementById('sec-' + i)?.classList.remove('active');
+  document.getElementById('nav-' + i)?.classList.remove('active', 'done');
+  document.getElementById('dnav-' + i)?.classList.remove('active', 'done');
+}
+current = 0;
+document.getElementById('sec-0')?.classList.add('active');
+document.getElementById('nav-0')?.classList.add('active');
+document.getElementById('dnav-0')?.classList.add('active');
 updateProgress();
 
 (function makeAnswersEditable() {
